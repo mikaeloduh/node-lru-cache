@@ -1,3 +1,5 @@
+var { performance } = require('perf_hooks');
+
 var test = require('tap').test
 var LRU = require('../')
 
@@ -518,7 +520,7 @@ test('maxAge on list, cleared in forEach', function (t) {
   l.set('foo', 1)
 
   // hacky.  make it seem older.
-  l.dumpLru().head.value.now = Date.now() - 100000
+  l.dumpLru().head.value.now = performance.now() - 100000
 
   t.equal(l.maxAge, 0)
 
